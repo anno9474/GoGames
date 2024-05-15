@@ -9,3 +9,4 @@
 - Memory
 - Minesweeper
 - 2048
+- fizzbuzz
