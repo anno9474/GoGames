@@ -2,7 +2,7 @@
 
 - [x] Guess the Number
 - [x] Hangman
-- [ ] Tic-Tac-Toe
+- [x] Tic-Tac-Toe
 - [ ] Rock, Paper, Scissor
 - [ ] Word Scramble
 - [ ] Simple Quiz Game
@@ -10,3 +10,4 @@
 - [ ] Minesweeper
 - [ ] 2048
 - [ ] fizzbuzz
+- [ ] Connect 4
