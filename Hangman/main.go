@@ -16,8 +16,109 @@ type Words struct {
 	Words []string `yaml:"words"`
 }
 
+var hangmanFigures = []string{
+	`
+	--------
+	 |
+	 |
+	 |
+	 |
+	 |
+	 |
+	--------
+	 |    |
+	`,
+	`
+	--------
+	 |     |
+	 |
+	 |
+	 |
+	 |
+	 |
+	--------
+	 |    |
+	`,
+	`
+	--------
+	 |     |
+	 |     0
+	 |
+	 |
+	 |
+	 |
+	--------
+	 |    |
+	`,
+	`
+	--------
+	 |     |
+	 |     0
+	 |     |
+	 |
+	 |
+	 |
+	--------
+	 |    |
+	`,
+	`
+	--------
+	 |     |
+	 |     0
+	 |    /|
+	 |
+	 |
+	 |
+	--------
+	 |    |
+	`,
+	`
+	--------
+	 |     |
+	 |     0
+	 |    /|\
+	 |
+	 |
+	 |
+	--------
+	 |    |
+	`,
+	`
+	--------
+	 |     |
+	 |     0
+	 |    /|\
+	 |	   |
+	 |  
+	 |
+	--------
+	 |    |
+	`,
+	`
+	--------
+	 |     |
+	 |     0
+	 |    /|\
+	 |     |
+	 |    / 
+	 |
+	--------
+	 |    |
+	`,
+	`
+	--------
+	 |     |
+	 |     0
+	 |    /|\
+	 |     |
+	 |    / \
+	 |
+	--------
+	 |    |
+	`,
+}
+
 func main() {
-	attempts := 10
 	words, err := readWordsFromYAML("./hangman/words.yaml")
 	if err != nil {
 		fmt.Printf("Error reading words from YAML file: %v\n", err)
@@ -32,14 +133,15 @@ func main() {
 	for i := range guessedWord {
 		guessedWord[i] = '_'
 	}
+	attempts := len(hangmanFigures) - 1
+	failedAttempts := 0
 	guessedLetters := make(map[rune]bool)
-
 	reader := bufio.NewReader(os.Stdin)
 
 	fmt.Println("Welcome to Hangman")
 	fmt.Printf("You have %d attempts to guess the word.\n", attempts)
 
-	for attempts > 0 {
+	for failedAttempts < attempts {
 		fmt.Printf("Word: %s\n", displayWord(targetWord, guessedLetters))
 		fmt.Print("Guess a letter: ")
 		input, _ := reader.ReadString('\n')
@@ -68,8 +170,10 @@ func main() {
 		if correctGuess {
 			fmt.Println("Good guess? - Good guess!!")
 		} else {
-			attempts--
-			fmt.Printf("Nope. Try again. You have %d attempts left.\n", attempts)
+			failedAttempts++
+			fmt.Println("Nope. Try again.")
+			fmt.Println(hangmanFigures[failedAttempts])
+			fmt.Printf("You have %d attempts left.\n", attempts-failedAttempts)
 		}
 
 		if string(guessedWord) == targetWord {
@@ -77,7 +181,7 @@ func main() {
 			return
 		}
 	}
-
+	fmt.Println(hangmanFigures[failedAttempts])
 	fmt.Println("Game over. The word was:", targetWord)
 }
 
