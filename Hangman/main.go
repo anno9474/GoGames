@@ -142,7 +142,9 @@ func main() {
 	fmt.Printf("You have %d attempts to guess the word.\n", attempts)
 
 	for failedAttempts < attempts {
+		fmt.Println(hangmanFigures[failedAttempts])
 		fmt.Printf("Word: %s\n", displayWord(targetWord, guessedLetters))
+		fmt.Printf("Guessed letters: %s\n", guessedLettersToString(guessedLetters))
 		fmt.Print("Guess a letter: ")
 		input, _ := reader.ReadString('\n')
 		input = strings.TrimSpace(input)
@@ -171,8 +173,6 @@ func main() {
 			fmt.Println("Good guess? - Good guess!!")
 		} else {
 			failedAttempts++
-			fmt.Println("Nope. Try again.")
-			fmt.Println(hangmanFigures[failedAttempts])
 			fmt.Printf("You have %d attempts left.\n", attempts-failedAttempts)
 		}
 
@@ -208,4 +208,12 @@ func displayWord(word string, guessedLetters map[rune]bool) string {
 		}
 	}
 	return string(displayedWord)
+}
+
+func guessedLettersToString(guessedLetters map[rune]bool) string {
+	var letters []string
+	for letter := range guessedLetters {
+		letters = append(letters, string(letter))
+	}
+	return strings.Join(letters, "")
 }
