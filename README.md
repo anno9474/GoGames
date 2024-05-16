@@ -4,7 +4,7 @@
 - [x] Hangman
 - [x] Tic-Tac-Toe
 - [x] Rock, Paper, Scissors, Lizard, Spock
-- [ ] Word Scramble
+- [x] Word Scramble
 - [ ] Simple Quiz Game
 - [ ] Memory
 - [ ] Minesweeper
