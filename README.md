@@ -3,7 +3,7 @@
 - [x] Guess the Number
 - [x] Hangman
 - [x] Tic-Tac-Toe
-- [ ] Rock, Paper, Scissor
+- [x] Rock, Paper, Scissors, Lizard, Spock
 - [ ] Word Scramble
 - [ ] Simple Quiz Game
 - [ ] Memory
